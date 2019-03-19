@@ -3,6 +3,7 @@ package controller;
 import model.Map;
 import model.Player;
 import model.Position;
+import model.Token;
 
 import java.util.Scanner;
 
@@ -12,11 +13,15 @@ public class Game {
     private Player player1;
     private Player player2;
     private Map map;
+    private Token t;
 
-    public Game(Player player1, Player player2, Map map){
+    public void play() {
+
+    }
+
+    public Game(Player player1, Player player2){
         this.player1 = player1;
         this.player2 = player2;
-        this.map = map;
     }
 
     public void setPlayerName(Player player){
@@ -26,18 +31,19 @@ public class Game {
     }
 
     public Position choosePosition(Player player){
-        int x;
-        int y;
         Position position = new Position();
+        int X = 0;
+        int Y = 0;
         do {
             System.out.println("Set Horizontal Position:");
-            x = Integer.parseInt(sc.nextLine());
-            position.setX(x);
+            X = Integer.parseInt(sc.nextLine());
+            position.setX(X);
             System.out.println("Set Vertical Position:");
-            y = Integer.parseInt(sc.nextLine());
-            position.setY(y);
+            Y = Integer.parseInt(sc.nextLine());
+            position.setY(Y);
         } while (!isValidPosition(position));
 
+        map.setPosTable(X, Y);
 
         return null;
     }
@@ -53,4 +59,5 @@ public class Game {
             return false;
         }
     }
+
 }

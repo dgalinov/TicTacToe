@@ -33,4 +33,11 @@ public class Map {
         }
         return empty;
     }
+
+    public void setPosTable(int posX, int posY){
+        int i = posX;
+        int j = posY;
+
+        System.out.println(table[i][j]);
+    }
 }

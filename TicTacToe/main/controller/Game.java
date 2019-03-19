@@ -28,14 +28,29 @@ public class Game {
     public Position choosePosition(Player player){
         int x;
         int y;
+        Position position = new Position();
+        do {
+            System.out.println("Set Horizontal Position:");
+            x = Integer.parseInt(sc.nextLine());
+            position.setX(x);
+            System.out.println("Set Vertical Position:");
+            y = Integer.parseInt(sc.nextLine());
+            position.setY(y);
+        } while (!isValidPosition(position));
+
+
         return null;
     }
 
     public boolean isValidPosition(Position position){
         if ((position.getX() == 1) || (position.getX() == 2) || (position.getX() == 0) || (position.getY() == 1) || (position.getY() == 2) || (position.getY() == 0)) {
-
+            if (map.isEmpty() == true) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-
+            return false;
         }
     }
 }

@@ -62,15 +62,15 @@ public class Game {
     }
 
     public boolean isValidPosition(Position position){
-        if ((position.getX() == 1) || (position.getX() == 2) || (position.getX() == 0) || (position.getY() == 1) || (position.getY() == 2) || (position.getY() == 0)) {
+        //if ((position.getX() == 1) || (position.getX() == 2) || (position.getX() == 0) || (position.getY() == 1) || (position.getY() == 2) || (position.getY() == 0)) {
             if (map.isEmpty() == true) {
                 return true;
             } else {
                 return false;
             }
-        } else {
+        /*} else {
             return false;
-        }
+        }*/
     }
 
 }

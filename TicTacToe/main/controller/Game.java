@@ -19,7 +19,7 @@ public class Game {
     private MapView mapView = new MapView();;
 
     public void play() {
-
+        choosePosition();
     }
 
     public Game(Player player1, Player player2){
@@ -33,7 +33,7 @@ public class Game {
         player.setName(name);
     }
 
-    public void choosePosition(Player player){
+    public void choosePosition(){
         Position position = new Position();
         int X = 0;
         int Y = 0;

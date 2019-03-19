@@ -19,14 +19,18 @@ public class Map {
     }
 
     public boolean isEmpty(){
+        boolean empty = false;
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
                 if ( table[i][j].contains("|_|")){
-                    return true;
+                    empty = true;
+                    //return true;
                 } else {
-                 return false;
+                    empty = false;
+                    //return false;
                 }
             }
         }
+        return empty;
     }
 }

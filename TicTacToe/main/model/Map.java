@@ -2,7 +2,16 @@ package model;
 
 public class Map {
     private String[][] table = new String[3][3];
+    private int cont = 0;
     public Map(){}
+
+    public String[][] getTable() {
+        return table;
+    }
+
+    public void setTable(String[][] table) {
+        this.table = table;
+    }
 
     public void initialTable(){
         for (int i = 0; i < table.length; i++){
@@ -19,14 +28,22 @@ public class Map {
     }
 
     public boolean isEmpty(){
+        boolean empty = false;
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
                 if ( table[i][j].contains("|_|")){
-                    return true;
+                    empty = true;
+                    //return true;
                 } else {
-                 return false;
+                    empty = false;
+                    //return false;
                 }
             }
         }
+        return empty;
+    }
+
+    public void setPosTable(int posX, int posY, Token token){
+        table[posX][posY] = token.name();
     }
 }

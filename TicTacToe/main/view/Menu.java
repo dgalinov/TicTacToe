@@ -25,10 +25,11 @@ public class Menu {
                     game = new Game(player1, player2);
                     game.setPlayerName(player1);
                     game.setPlayerName(player2);
-                    game.play();
-                    break;
+                    do {
+                        game.play();
+                    }while (true);
                 case 2:
-                    System.out.println("Byebye");
+                    System.out.println("Exiting the program...");
                     break;
             }
         } while (option != 2);

@@ -8,6 +8,8 @@ import view.MapView;
 
 import java.util.Scanner;
 
+import static model.Token.X;
+
 public class Game {
     Scanner sc = new Scanner(System.in);
 
@@ -18,7 +20,7 @@ public class Game {
     private int cont = 0;
     private MapView mapView = new MapView();;
 
-    public void play() {
+    public void play(){
         choosePosition();
     }
 
@@ -44,7 +46,7 @@ public class Game {
             System.out.println("Set Vertical Position:");
             Y = Integer.parseInt(sc.nextLine());
             position.setY(Y);
-        } while (!isValidPosition(position));
+        } while (!isValidPosition(X, Y));
 
         map.setPosTable(X, Y, playerRound());
 
@@ -54,23 +56,61 @@ public class Game {
     public Token playerRound(){
         if (cont == 0){
             cont ++;
-            return Token.X;
+            return X;
         } else {
             cont --;
             return Token.O;
         }
     }
 
-    public boolean isValidPosition(Position position){
-        //if ((position.getX() == 1) || (position.getX() == 2) || (position.getX() == 0) || (position.getY() == 1) || (position.getY() == 2) || (position.getY() == 0)) {
-            if (map.isEmpty() == true) {
-                return true;
-            } else {
-                return false;
-            }
-        /*} else {
-            return false;
-        }*/
+    public boolean isValidPosition(int X, int Y){
+        boolean valid = false;
+        if ((X < 0) || (X > 2) || (Y < 0) || (Y > 2)){
+            valid = false;
+        } else if (map.isEmpty(X, Y)){
+            valid = true;
+        }
+        return  valid;
     }
 
+
+    public boolean hasWin(){
+        if(playerRound() == X){
+
+        } else if (playerRound() == Token.O) {
+
+        }
+        return false;
+    }
+
+    public boolean verticalLine(){
+        boolean hasLine = false;
+        for(int i = 0; i < 3; i++) {
+            hasLine = true;
+            for(int j = 0; j < 3; j++) {
+                Position position = new Position(i, j);
+                if (playerRound() == X) {
+                    if (map.getTable()[i][j] == Token.X){
+
+                    }
+                }
+            }
+            if (hasLine = false) {
+                return hasLine = true;
+            }
+        }
+        return hasLine;
+    }
+
+    public boolean horizontalLine(){
+
+    }
+
+    public boolean diagonalLineLeftToRight() {
+
+    }
+
+    public boolean diagonalLineRightToLeft() {
+
+    }
 }

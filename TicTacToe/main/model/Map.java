@@ -27,8 +27,15 @@ public class Map {
         }
     }
 
-    public boolean isEmpty(){
-        boolean empty = false;
+    public boolean isEmpty(int X, int Y){
+        boolean empty = true;
+        if (table[X][Y].contains("|_|")){
+            empty = true;
+        } else {
+            empty = false;
+        }
+        return empty;
+        /*
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
                 if ( table[i][j].contains("|_|")){
@@ -40,7 +47,7 @@ public class Map {
                 }
             }
         }
-        return empty;
+        return empty;*/
     }
 
     public void setPosTable(int posX, int posY, Token token){

@@ -8,8 +8,6 @@ import view.MapView;
 
 import java.util.Scanner;
 
-import static model.Token.X;
-
 public class Game {
     Scanner sc = new Scanner(System.in);
 
@@ -56,7 +54,7 @@ public class Game {
     public Token playerRound(){
         if (cont == 0){
             cont ++;
-            return X;
+            return Token.X;
         } else {
             cont --;
             return Token.O;
@@ -73,26 +71,35 @@ public class Game {
         return  valid;
     }
 
-
-    public boolean hasWin(){
-        if(playerRound() == X){
-
-        } else if (playerRound() == Token.O) {
-
+    public boolean hasWin(Player player){
+        if (verticalLine(player)) {
+            return true;
+        }
+        if (horizontalLine(player)) {
+            return true;
+        }
+        if (diagonalLineLeftToRight(player)) {
+            return true;
+        }
+        if (diagonalLineRightToLeft(player)) {
+            return true;
         }
         return false;
     }
 
-    public boolean verticalLine(){
+
+
+    public boolean verticalLine(Player player){
         boolean hasLine = false;
         for(int i = 0; i < 3; i++) {
             hasLine = true;
             for(int j = 0; j < 3; j++) {
                 Position position = new Position(i, j);
-                if (playerRound() == X) {
-                    if (map.getTable()[i][j] == Token.X){
-
-                    }
+                if (!map.getTable()[i][j].equals(Token.X)){
+                    hasLine = false;
+                }
+                if (!map.getTable()[i][j].equals(Token.O)){
+                    hasLine = false;
                 }
             }
             if (hasLine = false) {
@@ -102,15 +109,43 @@ public class Game {
         return hasLine;
     }
 
-    public boolean horizontalLine(){
-
+    public boolean horizontalLine(Player player){
+        boolean hasLine = false;
+        for(int j = 0; j < 3; j++) {
+            hasLine = true;
+            for(int i = 0; i < 3; i++) {
+                Position position = new Position(i, j);
+                if (!map.getTable()[i][j].equals(Token.X)){
+                    hasLine = false;
+                }
+                if (!map.getTable()[i][j].equals(Token.O)){
+                    hasLine = false;
+                }
+            }
+            if (hasLine = false) {
+                return hasLine = true;
+            }
+        }
+        return hasLine;
     }
 
-    public boolean diagonalLineLeftToRight() {
-
+    public boolean diagonalLineLeftToRight(Player player) {
+        if ((map.getTable()[0][0].equals(Token.X)) && (map.getTable()[1][1].equals(Token.X)) && (map.getTable()[2][2].equals(Token.X))){
+            return true;
+        }
+        if ((map.getTable()[0][0].equals(Token.O)) && (map.getTable()[1][1].equals(Token.O)) && (map.getTable()[2][2].equals(Token.O))){
+            return true;
+        }
+        return false;
     }
 
-    public boolean diagonalLineRightToLeft() {
-
+    public boolean diagonalLineRightToLeft(Player player) {
+        if ((map.getTable()[0][2].equals(Token.X)) && (map.getTable()[1][1].equals(Token.X)) && (map.getTable()[2][0].equals(Token.X))){
+            return true;
+        }
+        if ((map.getTable()[0][2].equals(Token.O)) && (map.getTable()[1][1].equals(Token.O)) && (map.getTable()[2][0].equals(Token.O))){
+            return true;
+        }
+        return false;
     }
 }

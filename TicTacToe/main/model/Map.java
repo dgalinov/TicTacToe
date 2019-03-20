@@ -16,7 +16,7 @@ public class Map {
     public void initialTable(){
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
-                table[i][j] = "|_|";
+                table[i][j] = "_";
             }
         }
         for (int i = 0; i < table.length; i++){
@@ -29,7 +29,7 @@ public class Map {
 
     public boolean isEmpty(int X, int Y){
         boolean empty = true;
-        if (table[X][Y].contains("|_|")){
+        if (table[X][Y] == "_"){
             empty = true;
         } else {
             empty = false;

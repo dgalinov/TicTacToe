@@ -28,7 +28,7 @@ public class Game {
     }
 
     public void setPlayerName(Player player){
-        System.out.println("Set player name:");
+        System.out.print("Set player name:");
         String name = sc.nextLine();
         player.setName(name);
     }
@@ -38,10 +38,11 @@ public class Game {
         int X = 0;
         int Y = 0;
         do {
-            System.out.println("Set Horizontal Position:");
+            System.out.println("Introduce a position of X & Y [0-1-2]");
+            System.out.print("Set X:");
             X = Integer.parseInt(sc.nextLine());
             position.setX(X);
-            System.out.println("Set Vertical Position:");
+            System.out.print("Set Y:");
             Y = Integer.parseInt(sc.nextLine());
             position.setY(Y);
         } while (!isValidPosition(X, Y));
@@ -62,26 +63,26 @@ public class Game {
     }
 
     public boolean isValidPosition(int X, int Y){
-        boolean valid = false;
-        if ((X < 0) || (X > 2) || (Y < 0) || (Y > 2)){
-            valid = false;
-        } else if (map.isEmpty(X, Y)){
-            valid = true;
+        if ((X <= 0) || (X >= 2) || (Y <= 0) || (Y >= 2)){
+            return false;
+        } else if (map.isEmpty(X, Y)) {
+            return true;
+        } else {
+            return false;
         }
-        return  valid;
     }
 
-    public boolean gameOver(Player player){
-        if (hasWinner(player)) {
+    public boolean gameOver(){
+        if (hasWinner()) {
             return true;
         }
-        if (tableIsFull(player)) {
+        if (tableIsFull()) {
             return true;
         }
         return false;
     }
 
-    public boolean tableIsFull(Player player) {
+    public boolean tableIsFull() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if (map.getTable()[i][j] == "_"){
@@ -92,23 +93,23 @@ public class Game {
         return true;
     }
 
-    public boolean hasWinner(Player player){
-        if (verticalLine(player)) {
+    public boolean hasWinner(){
+        if (verticalLine()) {
             return true;
         }
-        if (horizontalLine(player)) {
+        if (horizontalLine()) {
             return true;
         }
-        if (diagonalLineLeftToRight(player)) {
+        if (diagonalLineLeftToRight()) {
             return true;
         }
-        if (diagonalLineRightToLeft(player)) {
+        if (diagonalLineRightToLeft()) {
             return true;
         }
         return false;
     }
 
-    public boolean verticalLine(Player player){
+    public boolean verticalLine(){
         boolean hasLine;
         for(int i = 0; i < 3; i++) {
             hasLine = true;
@@ -124,7 +125,7 @@ public class Game {
         return false;
     }
 
-    public boolean horizontalLine(Player player){
+    public boolean horizontalLine(){
         boolean hasLine;
         for(int j = 0; j < 3; j++) {
             hasLine = true;
@@ -141,14 +142,14 @@ public class Game {
         return false;
     }
 
-    public boolean diagonalLineLeftToRight(Player player){
+    public boolean diagonalLineLeftToRight(){
         if ((map.getTable()[0][0].equals(playerRound())) && (map.getTable()[1][1].equals(playerRound())) && (map.getTable()[2][2].equals(playerRound()))){
             return true;
         }
         return false;
     }
 
-    public boolean diagonalLineRightToLeft(Player player){
+    public boolean diagonalLineRightToLeft(){
         if ((map.getTable()[0][2].equals(playerRound())) && (map.getTable()[1][1].equals(playerRound())) && (map.getTable()[2][0].equals(playerRound()))){
             return true;
         }

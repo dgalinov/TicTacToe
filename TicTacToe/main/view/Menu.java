@@ -27,7 +27,7 @@ public class Menu {
                     game.setPlayerName(player2);
                     do {
                         game.play();
-                    }while (true);
+                    }while (!game.gameOver());
                 case 2:
                     System.out.println("Exiting the program...");
                     break;

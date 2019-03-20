@@ -1,22 +1,24 @@
 package model;
 
+import controller.Game;
+
 public class Map {
-    private String[][] table = new String[3][3];
+    private Token[][] table = new Token[3][3];
     private int cont = 0;
     public Map(){}
 
-    public String[][] getTable() {
+    public Token[][] getTable() {
         return table;
     }
 
-    public void setTable(String[][] table) {
+    public void setTable(Token[][] table) {
         this.table = table;
     }
 
     public void initialTable(){
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
-                table[i][j] = "_";
+                table[i][j] = null;
             }
         }
         for (int i = 0; i < table.length; i++){
@@ -28,13 +30,10 @@ public class Map {
     }
 
     public boolean isEmpty(int X, int Y){
-        boolean empty = true;
-        if (table[X][Y] == "_"){
-            empty = true;
-        } else {
-            empty = false;
+        if (table[X][Y] == null){
+            return true;
         }
-        return empty;
+        return false;
         /*
         for (int i = 0; i < table.length; i++){
             for (int j = 0; j < table.length; j++){
@@ -51,6 +50,6 @@ public class Map {
     }
 
     public void setPosTable(int posX, int posY, Token token){
-        table[posX][posY] = token.name();
+        table[posX][posY] = Token.valueOf(token.name());
     }
 }

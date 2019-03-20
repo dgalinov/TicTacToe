@@ -6,5 +6,4 @@ public class main {
         Menu menu = new Menu();
         System.out.println(menu);
     }
-
 }

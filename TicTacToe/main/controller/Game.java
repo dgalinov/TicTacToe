@@ -63,13 +63,10 @@ public class Game {
     }
 
     public boolean isValidPosition(int X, int Y){
-        if ((X <= 0) || (X >= 2) || (Y <= 0) || (Y >= 2)){
-            return false;
-        } else if (map.isEmpty(X, Y)) {
-            return true;
-        } else {
-            return false;
+        if (((X < 0) || (X > 2)) && ((Y < 0) || (Y > 2))){
+            return map.isEmpty(X, Y);
         }
+        return true;
     }
 
     public boolean gameOver(){
@@ -85,7 +82,7 @@ public class Game {
     public boolean tableIsFull() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                if (map.getTable()[i][j] == "_"){
+                if (map.getTable()[i][j] == null){
                     return false;
                 }
             }

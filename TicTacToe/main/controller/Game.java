@@ -71,7 +71,28 @@ public class Game {
         return  valid;
     }
 
-    public boolean hasWin(Player player){
+    public boolean gameOver(Player player){
+        if (hasWinner(player)) {
+            return true;
+        }
+        if (tableIsFull(player)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean tableIsFull(Player player) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if (map.getTable()[i][j] == "_"){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean hasWinner(Player player){
         if (verticalLine(player)) {
             return true;
         }
@@ -87,63 +108,48 @@ public class Game {
         return false;
     }
 
-
-
     public boolean verticalLine(Player player){
-        boolean hasLine = false;
+        boolean hasLine;
         for(int i = 0; i < 3; i++) {
             hasLine = true;
             for(int j = 0; j < 3; j++) {
-                Position position = new Position(i, j);
-                if (!map.getTable()[i][j].equals(Token.X)){
-                    hasLine = false;
-                }
-                if (!map.getTable()[i][j].equals(Token.O)){
+                if (!map.getTable()[i][j].equals(playerRound())){
                     hasLine = false;
                 }
             }
-            if (hasLine = false) {
-                return hasLine = true;
+            if (hasLine) {
+                return true;
             }
         }
-        return hasLine;
+        return false;
     }
 
     public boolean horizontalLine(Player player){
-        boolean hasLine = false;
+        boolean hasLine;
         for(int j = 0; j < 3; j++) {
             hasLine = true;
             for(int i = 0; i < 3; i++) {
                 Position position = new Position(i, j);
-                if (!map.getTable()[i][j].equals(Token.X)){
-                    hasLine = false;
-                }
-                if (!map.getTable()[i][j].equals(Token.O)){
+                if (!map.getTable()[i][j].equals(playerRound())){
                     hasLine = false;
                 }
             }
-            if (hasLine = false) {
-                return hasLine = true;
+            if (hasLine) {
+                return true;
             }
         }
-        return hasLine;
+        return false;
     }
 
-    public boolean diagonalLineLeftToRight(Player player) {
-        if ((map.getTable()[0][0].equals(Token.X)) && (map.getTable()[1][1].equals(Token.X)) && (map.getTable()[2][2].equals(Token.X))){
-            return true;
-        }
-        if ((map.getTable()[0][0].equals(Token.O)) && (map.getTable()[1][1].equals(Token.O)) && (map.getTable()[2][2].equals(Token.O))){
+    public boolean diagonalLineLeftToRight(Player player){
+        if ((map.getTable()[0][0].equals(playerRound())) && (map.getTable()[1][1].equals(playerRound())) && (map.getTable()[2][2].equals(playerRound()))){
             return true;
         }
         return false;
     }
 
-    public boolean diagonalLineRightToLeft(Player player) {
-        if ((map.getTable()[0][2].equals(Token.X)) && (map.getTable()[1][1].equals(Token.X)) && (map.getTable()[2][0].equals(Token.X))){
-            return true;
-        }
-        if ((map.getTable()[0][2].equals(Token.O)) && (map.getTable()[1][1].equals(Token.O)) && (map.getTable()[2][0].equals(Token.O))){
+    public boolean diagonalLineRightToLeft(Player player){
+        if ((map.getTable()[0][2].equals(playerRound())) && (map.getTable()[1][1].equals(playerRound())) && (map.getTable()[2][0].equals(playerRound()))){
             return true;
         }
         return false;

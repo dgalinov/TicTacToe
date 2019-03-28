@@ -2,6 +2,7 @@ package model;
 
 public enum Token {
     X,
+    H,
     O;
 
     public static Token valueOf(int token) {

@@ -1,6 +1,7 @@
 package view;
 
 import controller.Game;
+import model.Map;
 import model.Player;
 
 import java.util.Scanner;
@@ -22,12 +23,13 @@ public class Menu {
             option = Integer.parseInt(sc.nextLine());
             switch (option) {
                 case 1:
-                    game = new Game(player1, player2);
+                    game = new Game();
                     game.setPlayerName(player1);
                     game.setPlayerName(player2);
                     do {
                         game.play();
-                    }while (!game.gameOver());
+                    } while (!game.gameOver());
+                    break;
                 case 2:
                     System.out.println("Exiting the program...");
                     break;

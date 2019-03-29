@@ -18,7 +18,6 @@ public class Game {
         if(!gameOver()) {
             choosePosition();
         }
-
     }
 
     public Game(){

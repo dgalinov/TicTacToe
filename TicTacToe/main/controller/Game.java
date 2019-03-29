@@ -15,23 +15,32 @@ public class Game {
     private MapView mapView = new MapView();
 
     public void play(){
-        choosePosition();
+        if(!gameOver()) {
+            choosePosition();
+        }
+
     }
 
     public Game(){
         map.initialTable();
     }
 
-    public void setPlayerName(Player player){
-        System.out.print("Set player name:");
-        String name = sc.nextLine();
+    public void setPlayerName(Player player) {
+        String name;
+        do {
+            do {
+                System.out.print("Set player name:");
+                name = sc.nextLine();
+            } while (name.isEmpty());
+        }while(!playerNameValidation(name));
+
         player.setName(name);
     }
 
     private void choosePosition(){
         Position position = new Position();
-        int X = 0;
-        int Y = 0;
+        int X = -1;
+        int Y = -1;
 
         do {
             try {
@@ -43,11 +52,14 @@ public class Game {
             } catch (NumberFormatException e) {
                 System.out.println("Value input X or Y not valid, pls try again");
             }
-            position.setX(X);
-            position.setY(Y);
+
         } while (!isValidPosition(X, Y));
 
+        position.setX(X);
+        position.setY(Y);
+
         map.setPositionTable(X, Y, changeTokenPerRound());
+
 
         mapView.printMap(map);
     }
@@ -141,5 +153,10 @@ public class Game {
 
     private boolean diagonalLineRightToLeft(Token t){
         return (map.getTable()[0][2].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][0].equals(t));
+    }
+
+    public static boolean playerNameValidation(String name){
+        boolean valid = name.matches("(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$");
+        return valid;
     }
 }

@@ -1,10 +1,7 @@
 package model;
 
-import controller.Game;
-
 public class Map {
     private Token[][] table = new Token[3][3];
-    private int cont = 0;
     public Map(){
         initialTable();
     }
@@ -19,14 +16,11 @@ public class Map {
         }
     }
 
-    public boolean isEmpty(int X, int Y){
-        if (table[X][Y].equals(Token.H)){
-            return true;
-        }
-        return false;
+    public boolean positionIsEmpty(int X, int Y){
+        return table[X][Y].equals(Token.H);
     }
 
-    public void setPosTable(int posX, int posY, Token token){
-        table[posX][posY] = Token.valueOf(token.name());
+    public void setPositionTable(int positionX, int positionY, Token token){
+        table[positionX][positionY] = Token.valueOf(token.name());
     }
 }

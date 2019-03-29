@@ -9,7 +9,7 @@ import view.MapView;
 import java.util.Scanner;
 
 public class Game {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     private Map map = new Map();
     private int cont = 0;
     private MapView mapView = new MapView();
@@ -28,7 +28,7 @@ public class Game {
         player.setName(name);
     }
 
-    public void choosePosition(){
+    private void choosePosition(){
         Position position = new Position();
         int X = 0;
         int Y = 0;
@@ -47,12 +47,12 @@ public class Game {
             position.setY(Y);
         } while (!isValidPosition(X, Y));
 
-        map.setPosTable(X, Y, changeTokenPerRound());
+        map.setPositionTable(X, Y, changeTokenPerRound());
 
         mapView.printMap(map);
     }
 
-    public Token changeTokenPerRound(){
+    private Token changeTokenPerRound(){
         if (cont == 0){
             cont ++;
             return Token.X;
@@ -62,7 +62,7 @@ public class Game {
         }
     }
 
-    public Token getPlayerRound() {
+    private Token getPlayerRound() {
         if (cont == 0) {
             return Token.X;
         } else {
@@ -70,14 +70,13 @@ public class Game {
         }
     }
 
-    public boolean isValidPosition(int X, int Y){
-        boolean valid = false;
+    private boolean isValidPosition(int X, int Y){
         if ((X < 0) || (X > 2) || (Y < 0) || (Y > 2)){
-            valid = false;
-        } else if (map.isEmpty(X, Y)){
-            valid = true;
+            return false;
+        } else if (map.positionIsEmpty(X, Y)){
+            return true;
         }
-        return  valid;
+        return  false;
     }
 
     public boolean gameOver(){
@@ -92,7 +91,7 @@ public class Game {
         return false;
     }
 
-    public boolean tableIsFull() {
+    private boolean tableIsFull() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if (map.getTable()[i][j] == Token.H){
@@ -103,7 +102,7 @@ public class Game {
         return true;
     }
 
-    public boolean hasWinner(){
+    private boolean hasWinner(){
         if (verticalLine(getPlayerRound())) {
             return true;
         }
@@ -113,13 +112,10 @@ public class Game {
         if (diagonalLineLeftToRight(getPlayerRound())) {
             return true;
         }
-        if (diagonalLineRightToLeft(getPlayerRound())) {
-            return true;
-        }
-        return false;
+        return diagonalLineRightToLeft(getPlayerRound());
     }
 
-    public boolean verticalLine(Token t){
+    private boolean verticalLine(Token t){
         outer:for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if(!map.getTable()[i][j].equals(t)) continue outer;
@@ -129,7 +125,7 @@ public class Game {
         return false;
     }
 
-    public boolean horizontalLine(Token t){
+    private boolean horizontalLine(Token t){
         outer:for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if(!map.getTable()[j][i].equals(t)) continue outer;
@@ -139,17 +135,11 @@ public class Game {
         return false;
     }
 
-    public boolean diagonalLineLeftToRight(Token t){
-        if ((map.getTable()[0][0].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][2].equals(t))){
-            return true;
-        }
-        return false;
+    private boolean diagonalLineLeftToRight(Token t){
+        return (map.getTable()[0][0].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][2].equals(t));
     }
 
-    public boolean diagonalLineRightToLeft(Token t){
-        if ((map.getTable()[0][2].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][0].equals(t))){
-            return true;
-        }
-        return false;
+    private boolean diagonalLineRightToLeft(Token t){
+        return (map.getTable()[0][2].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][0].equals(t));
     }
 }

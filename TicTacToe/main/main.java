@@ -1,4 +1,3 @@
-import model.Map;
 import view.Menu;
 
 public class main {

@@ -65,7 +65,12 @@ public class Game {
 
     private Token changeTokenPerRound(){
         if (cont == 0){
-            cont ++;
+            if (hasWinner())
+            {
+                gameOver();
+            }
+                cont ++;
+
             return Token.X;
         } else {
             cont --;
@@ -154,7 +159,7 @@ public class Game {
         return (map.getTable()[0][2].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][0].equals(t));
     }
 
-    public static boolean playerNameValidation(String name){
+    public boolean playerNameValidation(String name){
         boolean valid = name.matches("(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$");
         return valid;
     }

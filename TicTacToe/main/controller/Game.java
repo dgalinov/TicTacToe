@@ -36,7 +36,7 @@ public class Game {
         player.setName(name);
     }
 
-    private void choosePosition(){
+    public void choosePosition(){
         Position position = new Position();
         int X = -1;
         int Y = -1;
@@ -63,7 +63,7 @@ public class Game {
         mapView.printMap(map);
     }
 
-    private Token changeTokenPerRound(){
+    public Token changeTokenPerRound(){
         if (cont == 0){
             if (hasWinner())
             {
@@ -78,7 +78,7 @@ public class Game {
         }
     }
 
-    private Token getPlayerRound() {
+    public Token getPlayerRound() {
         if (cont == 0) {
             return Token.X;
         } else {
@@ -86,7 +86,7 @@ public class Game {
         }
     }
 
-    private boolean isValidPosition(int X, int Y){
+    public boolean isValidPosition(int X, int Y){
         if ((X < 0) || (X > 2) || (Y < 0) || (Y > 2)){
             return false;
         } else if (map.positionIsEmpty(X, Y)){
@@ -107,7 +107,7 @@ public class Game {
         return false;
     }
 
-    private boolean tableIsFull() {
+    public boolean tableIsFull() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if (map.getTable()[i][j] == Token.H){
@@ -118,7 +118,7 @@ public class Game {
         return true;
     }
 
-    private boolean hasWinner(){
+    public boolean hasWinner(){
         if (verticalLine(getPlayerRound())) {
             return true;
         }
@@ -131,7 +131,7 @@ public class Game {
         return diagonalLineRightToLeft(getPlayerRound());
     }
 
-    private boolean verticalLine(Token t){
+    public boolean verticalLine(Token t){
         outer:for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if(!map.getTable()[i][j].equals(t)) continue outer;
@@ -141,7 +141,7 @@ public class Game {
         return false;
     }
 
-    private boolean horizontalLine(Token t){
+    public boolean horizontalLine(Token t){
         outer:for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 if(!map.getTable()[j][i].equals(t)) continue outer;
@@ -151,11 +151,11 @@ public class Game {
         return false;
     }
 
-    private boolean diagonalLineLeftToRight(Token t){
+    public boolean diagonalLineLeftToRight(Token t){
         return (map.getTable()[0][0].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][2].equals(t));
     }
 
-    private boolean diagonalLineRightToLeft(Token t){
+    public boolean diagonalLineRightToLeft(Token t){
         return (map.getTable()[0][2].equals(t)) && (map.getTable()[1][1].equals(t)) && (map.getTable()[2][0].equals(t));
     }
 
